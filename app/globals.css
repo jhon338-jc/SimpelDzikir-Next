@@ -1,49 +1,2754 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html {
-  height: 100%;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8edf5 100%);
+    color: #1a2a3a;
+    line-height: 1.6;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.app-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #ffffff;
+    min-height: 100vh;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #2e7d64 0%, #1a5d4a 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-small {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.back-btn {
+    color: white;
+    font-size: 1.3rem;
+    text-decoration: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+}
+
+/* Main Menu */
+.main-menu {
+    padding: 20px;
+}
+
+.greeting {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6d9 100%);
+    border-radius: 20px;
+}
+
+.greeting h2 {
+    color: #2e7d64;
+    margin-bottom: 5px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.menu-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-decoration: none;
+    color: #1a2a3a;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid #e0e8f0;
+}
+
+.menu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(46,125,100,0.15);
+    border-color: #2e7d64;
+}
+
+.menu-icon {
+    font-size: 2.5rem;
+    color: #2e7d64;
+    margin-bottom: 10px;
+}
+
+.menu-card h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.menu-card p {
+    font-size: 0.75rem;
+    color: #7a8a9a;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 500px;
+    margin: 0 auto;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 20px;
+    box-shadow: 0 -2px 15px rgba(0,0,0,0.08);
+    border-top: 1px solid #e0e8f0;
+    z-index: 100;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #a0b0c0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.7rem;
+    transition: all 0.3s ease;
+}
+
+.nav-item i {
+    font-size: 1.3rem;
+}
+
+.nav-item.active {
+    color: #2e7d64;
+}
+
+/* Content Pages */
+.content-page {
+    padding: 20px;
+    padding-bottom: 80px;
+}
+
+/* Tabs */
+.section-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    background: #f0f4f8;
+    padding: 5px;
+    border-radius: 12px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #6b7a8a;
+}
+
+.tab-btn.active {
+    background: #2e7d64;
+    color: white;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Prayer Cards */
+.prayer-card, .doa-card, .sholawat-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid #e0e8f0;
+    transition: all 0.3s ease;
+}
+
+.prayer-card:hover, .doa-card:hover {
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.prayer-card h3, .doa-card h3, .sholawat-card h3 {
+    color: #2e7d64;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.arab-text {
+    font-size: 1.3rem;
+    font-family: 'Traditional Arabic', 'Amiri', 'Scheherazade', serif;
+    line-height: 1.8;
+    margin: 10px 0;
+    color: #1a2a3a;
+    text-align: right;
+    direction: rtl;
+}
+
+.latin-text {
+    font-style: italic;
+    color: #4a5a6a;
+    margin: 10px 0;
+}
+
+.meaning {
+    color: #7a8a9a;
+    font-size: 0.9rem;
+    margin: 10px 0;
+}
+
+.audio-btn {
+    background: #e8f5e9;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    color: #2e7d64;
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.audio-btn:hover {
+    background: #2e7d64;
+    color: white;
+}
+
+/* Dzikir Items */
+.dzikir-section {
+    margin-bottom: 30px;
+}
+
+.dzikir-section h3 {
+    color: #2e7d64;
+    margin-bottom: 15px;
+}
+
+.dzikir-item {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-left: 4px solid #2e7d64;
+}
+
+.dzikir-item .count {
+    display: inline-block;
+    background: #2e7d64;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-right: 10px;
+}
+
+/* Jadwal Sholat */
+.location-box {
+    background: linear-gradient(135deg, #2e7d64 0%, #1a5d4a 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.location-btn {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.date-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.prayer-times {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.prayer-time-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid #e0e8f0;
+}
+
+.prayer-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.prayer-clock {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2e7d64;
+}
+
+.next-prayer {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6d9 100%);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+}
+
+.next-prayer-info {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 10px 0;
+    color: #2e7d64;
+}
+
+.countdown {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2e7d64;
+    font-family: monospace;
+}
+
+/* Tasbih */
+.tasbih-container {
+    text-align: center;
+}
+
+.current-dzikir {
+    background: linear-gradient(135deg, #2e7d64 0%, #1a5d4a 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
+
+.current-dzikir h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.arabic-dzikir {
+    font-size: 2rem;
+    font-family: 'Traditional Arabic', serif;
+    margin: 15px 0;
+}
+
+.counter-display {
+    margin: 30px 0;
+}
+
+.counter-number {
+    font-size: 5rem;
+    font-weight: 700;
+    color: #2e7d64;
+}
+
+.counter-target {
+    color: #7a8a9a;
+}
+
+.counter-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.counter-btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.counter-btn.add {
+    background: #2e7d64;
+    color: white;
+}
+
+.counter-btn.reset {
+    background: #e0e8f0;
+    color: #4a5a6a;
+}
+
+.dzikir-steps {
+    text-align: left;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.step-number {
+    width: 35px;
+    height: 35px;
+    background: #2e7d64;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.completion-message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    display: none;
+}
+
+.completion-message.show {
+    display: block;
+    background: #4caf50;
+    color: white;
+    animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Compass */
+.compass-container {
+    text-align: center;
+}
+
+.compass {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto 30px;
+}
+
+.compass-circle {
+    width: 100%;
+    height: 100%;
+    background: conic-gradient(from 0deg, #2e7d64 0%, #e8f5e9 100%);
+    border-radius: 50%;
+    position: relative;
+    transition: transform 0.1s linear;
+}
+
+.direction {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.kiblat-marker {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ff6b6b;
+    font-size: 0.8rem;
+}
+
+.compass-btn {
+    background: #2e7d64;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+/* Settings */
+.settings-section {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.settings-section h3 {
+    color: #2e7d64;
+    margin-bottom: 15px;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e0e8f0;
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.3s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2e7d64;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.reset-settings-btn {
+    width: 100%;
+    padding: 12px;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+/* Search Box */
+.search-box {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0b0c0;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 1px solid #e0e8f0;
+    border-radius: 25px;
+    font-size: 1rem;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .app-container {
+        border-radius: 0;
+    }
+    
+    .menu-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .counter-number {
+        font-size: 3rem;
+    }
+    
+    .arabic-dzikir {
+        font-size: 1.5rem;
+    }
+}
+
+
+/* === KODE CSS BARU TAMBAHKAN DI BAWAH INI === */
+
+/* Select Wrapper Styling */
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 60%;
+}
+
+.select-wrapper select {
+    width: 100%;
+    padding: 10px 30px 10px 15px;
+    border: 1px solid #e0e8f0;
+    border-radius: 12px;
+    background: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: #1a2a3a;
+    appearance: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.select-wrapper select:focus {
+    outline: none;
+    border-color: #2e7d64;
+    box-shadow: 0 0 0 2px rgba(46,125,100,0.2);
+}
+
+.select-wrapper i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0b0c0;
+    pointer-events: none;
+    font-size: 0.8rem;
+}
+
+/* Volume Control */
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+}
+
+.volume-control input {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: #e0e8f0;
+}
+
+.volume-control input::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #2e7d64;
+    cursor: pointer;
+}
+
+/* Preview Section */
+.preview-section {
+    background: linear-gradient(135deg, #f0f7f4 0%, #e8f0ec 100%);
+}
+
+.preview-text {
+    text-align: center;
+    padding: 15px;
+    background: white;
+    border-radius: 12px;
+}
+
+.preview-text .arab-preview {
+    font-size: var(--font-size-arabic, 1.3rem);
+    font-family: 'Traditional Arabic', serif;
+    margin: 10px 0;
+}
+
+.preview-text .latin-preview {
+    font-size: var(--font-size-latin, 1rem);
+    font-style: italic;
+    color: #4a5a6a;
+}
+
+.preview-text .meaning-preview {
+    font-size: var(--font-size-base, 0.9rem);
+    color: #7a8a9a;
+}
+
+/* Developer Name */
+.developer-name {
+    color: #2e7d64;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Toast Message */
+.toast-message {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2e7d64;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 2000;
+    animation: slideUp 0.3s ease, fadeOut 0.3s ease 1.2s forwards;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* CSS Variables for Font Sizes */
+:root {
+    --font-size-base: 16px;
+    --font-size-arabic: 1.3rem;
+    --font-size-latin: 1rem;
+}
+
+/* ================================================================
+   SIMPEL DZIKIR — UI NEXT.JS (komponen React baru)
+   ================================================================ */
+html { font-size: var(--font-size-base); }
+body { font-family: var(--font-inter), 'Inter', -apple-system, sans-serif; }
+
+.app-shell { min-height: 100vh; padding-bottom: 76px; }
+
+.header { position: sticky; top: 0; z-index: 50; }
+.back-btn {
+    background: none; border: none; color: white; font-size: 1rem;
+    cursor: pointer; padding: 6px; margin-right: 4px; opacity: .9;
+}
+.greeting-name { max-width: 90px; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---------- Login ---------- */
+.login-screen {
+    min-height: 100vh; background: linear-gradient(135deg, #2e7d64 0%, #1a5d4a 100%);
+    display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.login-card {
+    width: 100%; max-width: 400px; background: white; border-radius: 24px;
+    padding: 28px 24px; box-shadow: 0 20px 60px rgba(0,0,0,.3);
+}
+.login-logo { text-align: center; margin-bottom: 18px; }
+.login-logo i { font-size: 3rem; color: #2e7d64; }
+.login-logo h1 { color: #1a5d4a; font-size: 1.5rem; margin: 8px 0 2px; }
+.login-logo p { color: #7a8a9a; font-size: .8rem; }
+.login-tabs { display: flex; background: #f0f7f4; border-radius: 14px; padding: 4px; margin-bottom: 18px; }
+.login-tabs button {
+    flex: 1; padding: 10px; border: none; background: transparent; border-radius: 11px;
+    font-weight: 600; color: #4a5a6a; cursor: pointer; font-size: .9rem;
+}
+.login-tabs button.active { background: white; color: #2e7d64; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.login-form { display: flex; flex-direction: column; gap: 14px; }
+.login-form label { font-size: .8rem; font-weight: 600; color: #4a5a6a; display: flex; flex-direction: column; gap: 6px; }
+.login-form input {
+    border: 1px solid #e0e8f0; border-radius: 12px; padding: 12px 14px;
+    font-size: .95rem; outline: none; transition: border .2s;
+}
+.login-form input:focus { border-color: #2e7d64; }
+.login-error { background: #fdecea; color: #d32f2f; border-radius: 10px; padding: 10px 12px; font-size: .8rem; }
+.btn-primary {
+    background: #2e7d64; color: white; border: none; border-radius: 12px;
+    padding: 13px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: background .2s;
+}
+.btn-primary:hover { background: #1a5d4a; }
+.btn-primary:disabled { opacity: .6; cursor: not-allowed; }
+.btn-outline {
+    background: white; color: #2e7d64; border: 1.5px solid #2e7d64; border-radius: 12px;
+    padding: 11px 16px; font-weight: 600; cursor: pointer; display: inline-flex; gap: 8px; align-items: center;
+}
+.btn-outline:hover { background: #f0f7f4; }
+.btn-outline:disabled { opacity: .5; cursor: not-allowed; }
+.login-note { font-size: .72rem; color: #9aabba; text-align: center; margin-top: 14px; line-height: 1.5; }
+
+/* ---------- Toast ---------- */
+.toast-container { position: fixed; top: 74px; left: 50%; transform: translateX(-50%); z-index: 200; display: flex; flex-direction: column; gap: 8px; width: min(92vw, 380px); }
+.toast {
+    background: #263238; color: white; padding: 12px 16px; border-radius: 14px;
+    font-size: .84rem; font-weight: 500; box-shadow: 0 8px 24px rgba(0,0,0,.25);
+    animation: toastIn .25s ease; text-align: center;
+}
+.toast-success { background: #2e7d64; }
+.toast-error { background: #d32f2f; }
+@keyframes toastIn { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: translateY(0); } }
+.loading-hint { text-align: center; color: #7a8a9a; padding: 18px; font-size: .85rem; }
+
+/* ---------- Jadwal ---------- */
+.clock-section { text-align: center; padding: 18px 0 6px; }
+.clock-time { font-size: 3rem; font-weight: 700; color: #1a5d4a; letter-spacing: 2px; font-variant-numeric: tabular-nums; }
+.clock-date { color: #4a5a6a; font-size: .92rem; margin-top: 2px; }
+.clock-timezone { color: #2e7d64; font-weight: 600; font-size: .82rem; margin-top: 2px; }
+.hijri-date { color: #c77800; font-weight: 600; font-size: .84rem; margin-top: 4px; }
+
+.location-bar {
+    display: flex; align-items: center; gap: 12px; justify-content: space-between;
+    background: white; border: 1px solid #e0e8f0; border-radius: 14px; padding: 12px 14px; margin: 12px 0;
+}
+.gps-toggle { display: flex; align-items: center; gap: 8px; font-size: .82rem; color: #4a5a6a; font-weight: 500; }
+.city-select {
+    border: 1px solid #e0e8f0; border-radius: 10px; padding: 10px; font-size: .84rem;
+    background: white; color: #1a5d4a; max-width: 200px;
+}
+.gps-coords { font-size: .76rem; color: #7a8a9a; }
+.gps-status { color: #ff9800; font-size: .72rem; }
+
+.prayer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
+.prayer-card-item {
+    background: #f9fcfa; border: 1px solid #e6f0ea; border-radius: 14px; padding: 12px;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+}
+.prayer-card-item i { color: #2e7d64; font-size: 1.1rem; }
+.prayer-name { font-size: .78rem; color: #4a5a6a; font-weight: 600; }
+.prayer-time { font-size: 1.15rem; font-weight: 700; color: #1a5d4a; font-variant-numeric: tabular-nums; }
+
+.alarm-section, .setings-section {
+    background: white; border: 1px solid #e0e8f0; border-radius: 16px; padding: 16px; margin: 14px 0;
+}
+.alarm-section h3, .setings-section h3 { font-size: .95rem; color: #1a5d4a; margin-bottom: 12px; }
+.alarm-section h3 i, .setings-section h3 i { color: #2e7d64; margin-right: 6px; }
+
+.chips-row { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 12px; -webkit-overflow-scrolling: touch; }
+.chips-row::-webkit-scrollbar { display: none; }
+.chip { padding: 8px 14px; border-radius: 20px; border: 1px solid #e0e8f0; background: white; color: #4a5a6a; font-size: .78rem; font-weight: 500; white-space: nowrap; cursor: pointer; transition: all .2s; }
+.chip.chip-active, .chip.active, .chip:hover { background: #2e7d64; color: white; border-color: #2e7d64; }
+
+.sound-row, .setting-row, .toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 0; font-size: .88rem; color: #3a4a5a; }
+.sound-row + .sound-row, .setting-row + .setting-row { border-top: 1px solid #f0f4f2; }
+.sound-row input[type=range], .setting-row input[type=range] { flex: 1; max-width: 160px; accent-color: #2e7d64; }
+.setting-row strong { color: #1a5d4a; font-size: .86rem; max-width: 55%; overflow: hidden; text-overflow: ellipsis; }
+.setting-note { font-size: .74rem; color: #8a9aaa; margin-top: 8px; line-height: 1.5; }
+.action-row { margin-top: 12px; }
+
+.segmented { display: flex; background: #f0f7f4; border-radius: 12px; padding: 3px; }
+.segmented button {
+    border: none; background: transparent; padding: 7px 12px; border-radius: 10px;
+    font-size: .76rem; font-weight: 600; color: #4a5a6a; cursor: pointer;
+}
+.segmented button.active { background: white; color: #2e7d64; box-shadow: 0 1px 6px rgba(0,0,0,.1); }
+
+/* ---------- Kiblat ---------- */
+.kiblat-compass-card { text-align: center; background: white; border: 1px solid #e0e8f0; border-radius: 20px; padding: 22px 16px; margin: 12px 0; position: relative; overflow: hidden; }
+.compass-ring {
+    width: 220px; height: 220px; margin: 0 auto; border-radius: 50%;
+    border: 8px solid #e8f0ea; position: relative; transition: transform .15s linear; will-change: transform;
+}
+.compass-dial { position: absolute; inset: 0; }
+.tick { position: absolute; left: 50%; top: 50%; width: 2px; height: 12px; background: #c3d5ca; transform-origin: 0 0; }
+.tick:nth-child(3n+1) { height: 18px; background: #8fae9c; }
+.compass-cardinal { position: absolute; inset: 0; }
+.compass-north { position: absolute; top: 4px; left: 50%; transform: translateX(-50%); color: #e53935; font-weight: 800; font-size: .9rem; }
+.compass-center {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+}
+.compass-center i { font-size: 2rem; color: #2e7d64; }
+.compass-center strong { font-size: 1rem; color: #1a5d4a; }
+.kiblat-arrow-wrap { margin-top: -8px; color: #ff9800; font-size: 3rem; transition: transform .15s linear; will-change: transform; filter: drop-shadow(0 2px 6px rgba(0,0,0,.18)); }
+.kiblat-info h2 { font-size: 2.4rem; color: #2e7d64; margin: 4px 0 0; }
+.kiblat-info p { color: #4a5a6a; font-size: .86rem; }
+.kiblat-info .distance { color: #ff9800; font-weight: 600; margin-top: 6px; }
+.kiblat-info .coords { color: #8a9aaa; font-size: .74rem; margin-top: 2px; }
+.compass-actions { margin-top: 14px; }
+
+/* ---------- Tasbih ---------- */
+.dzikir-steps { display: flex; gap: 10px; margin: 12px 0 16px; }
+.dzikir-step {
+    flex: 1; background: white; border: 1px solid #e0e8f0; border-radius: 14px; padding: 10px 6px;
+    display: flex; flex-direction: column; gap: 6px; cursor: pointer; text-align: center; transition: all .2s;
+}
+.dzikir-step.active { border-color: #2e7d64; background: #f0f7f4; }
+.dzikir-step.done { opacity: .7; }
+.step-name { font-size: .72rem; font-weight: 600; color: #1a5d4a; }
+.step-count { font-size: .7rem; color: #7a8a9a; }
+.step-bar { height: 5px; background: #edf2ef; border-radius: 4px; overflow: hidden; display: block; }
+.step-bar i { display: block; height: 100%; background: #2e7d64; border-radius: 4px; transition: width .2s; }
+
+.tasbih-card { text-align: center; }
+.tasbih-info { margin-bottom: 14px; }
+.current-dzikir { color: #1a5d4a; font-size: 1.4rem; }
+.tasbih-target { color: #7a8a9a; font-size: .82rem; }
+.tasbih-counter { cursor: pointer; user-select: none; -webkit-user-select: none; }
+.counter-circle {
+    width: 230px; height: 230px; margin: 0 auto; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; transition: background .1s;
+}
+.counter-inner {
+    width: 188px; height: 188px; border-radius: 50%; background: white;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    box-shadow: inset 0 0 0 1px #e0e8f0;
+}
+.count-total { font-size: 4rem; font-weight: 800; color: #1a5d4a; line-height: 1; font-variant-numeric: tabular-nums; }
+.count-total.done { color: #2e7d64; }
+.count-remaining { font-size: .78rem; color: #8a9aaa; }
+.tasbih-tip { margin-top: 16px; color: #4a5a6a; font-size: .88rem; }
+.tasbih-tip strong { color: #2e7d64; }
+.tasbih-hint { color: #a0b0bc; font-size: .72rem; margin-top: 4px; }
+.toggle-row { background: white; border: 1px solid #e0e8f0; border-radius: 14px; padding: 10px 14px; margin-top: 16px; gap: 16px; }
+
+/* ---------- Doa / Sholawat ---------- */
+.search-section { display: flex; align-items: center; gap: 8px; margin: 12px 0; }
+.search-section input {
+    flex: 1; border: 1px solid #e0e8f0; border-radius: 14px; padding: 12px 16px;
+    font-size: .9rem; background: white; outline: none;
+}
+.search-section input:focus { border-color: #2e7d64; }
+.fav-filter {
+    width: 44px; height: 44px; border-radius: 14px; border: 1px solid #e0e8f0; background: white;
+    color: #b0c0d0; font-size: 1rem; cursor: pointer; flex: 0 0 auto;
+}
+.fav-filter.active { color: #e53935; border-color: #ffcdd2; background: #fdecea; }
+.doas-grid { display: flex; flex-direction: column; gap: 14px; }
+.doa-card { background: white; border: 1px solid #e0e8f0; border-radius: 16px; overflow: hidden; margin-bottom: 12px; }
+.doa-head { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; }
+.doa-icon {
+    width: 40px; height: 40px; border-radius: 12px; background: #f0f7f4; color: #2e7d64;
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex: 0 0 auto;
+}
+.doa-title { flex: 1; min-width: 0; }
+.doa-title h3 { font-size: .92rem; color: #1a5d4a; margin: 0; }
+.doa-title span { font-size: .7rem; color: #8a9aaa; text-transform: capitalize; }
+.doa-head > i { color: #b0c0d0; }
+.doa-content { padding: 0 16px 16px; }
+.arabic-doa, .arabic-sholawat, .arab-text {
+    font-family: 'Traditional Arabic', 'Amiri', 'Scheherazade New', serif;
+    font-size: 1.25rem; line-height: 1.9; color: #1a5d4a; text-align: right; direction: rtl;
+}
+.latin-doa, .latin-sholawat, .latin-text { font-size: .86rem; color: #4a8a6c; font-style: italic; margin-top: 6px; }
+.meaning-doa, .meaning-sholawat, .meaning-text { font-size: .82rem; color: #4a5a6a; margin-top: 6px; line-height: 1.55; }
+.doa-actions, .sholawat-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+.sound-btn, .fav-btn {
+    width: 40px; height: 40px; border-radius: 12px; border: 1px solid #e0e8f0; background: #f9fcfa;
+    color: #2e7d64; font-size: .95rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: all .2s;
+}
+.sound-btn:hover, .fav-btn:hover { background: #f0f7f4; }
+.fav-btn.active { color: #e53935; border-color: #ffcdd2; background: #fff5f5; }
+.sholawat-card { background: white; border: 1px solid #e0e8f0; border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+.sholawat-content h3 { font-size: .95rem; color: #1a5d4a; cursor: pointer; }
+.sholawat-content h3 i { color: #2e7d64; margin-right: 6px; }
+.arabic-sholawat { font-size: 1.15rem; }
+.empty-state { text-align: center; color: #9aabba; padding: 30px 0; font-size: .9rem; }
+
+/* ---------- Panduan ---------- */
+.panduan-tabs { display: flex; gap: 6px; overflow-x: auto; padding: 4px 0 12px; }
+.panduan-tabs::-webkit-scrollbar { display: none; }
+.panduan-tabs button {
+    white-space: nowrap; padding: 9px 14px; border-radius: 20px; border: 1px solid #e0e8f0;
+    background: white; color: #4a5a6a; font-size: .78rem; font-weight: 600; cursor: pointer; transition: all .2s;
+}
+.panduan-tabs button.active { background: #2e7d64; color: white; border-color: #2e7d64; }
+.basmalah-card { background: linear-gradient(135deg, #f0f7f4, #e8f0ea); border-radius: 16px; padding: 18px; text-align: center; margin-bottom: 16px; }
+.basmalah-card .arabic-doa { text-align: center; direction: rtl; margin-bottom: 6px; }
+.basmalah-card p:last-child { font-size: .8rem; color: #4a5a6a; }
+.niats h3, .dzikir-set h3 { font-size: .95rem; color: #1a5d4a; margin: 14px 0 10px; }
+.niats h3 i, .dzikir-set h3 i { color: #2e7d64; margin-right: 6px; }
+.niat-card { background: white; border: 1px solid #e0e8f0; border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+.guide-card { background: white; border: 1px solid #e0e8f0; border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+.guide-card h3 { font-size: .95rem; color: #1a5d4a; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+.guide-card h3 i:last-child { margin-left: auto; color: #b0c0d0; }
+.guide-steps { padding-left: 20px; margin: 12px 0 0; }
+.guide-steps li { margin-bottom: 8px; font-size: .86rem; color: #3a4a5a; line-height: 1.5; }
+.guide-note { font-size: .78rem; color: #8a9aaa; background: #f7faf8; border-radius: 10px; padding: 10px 12px; margin-top: 12px; line-height: 1.5; }
+.repeat-badge {
+    font-size: .72rem; font-weight: 700; color: #ff9800; background: #fff3e0;
+    border-radius: 12px; padding: 3px 9px; white-space: nowrap;
+}
+.dzikir-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+
+/* ---------- Dzikir harian ---------- */
+.dzikir-summary-card {
+    background: white; border: 1px solid #e0e8f0; border-radius: 16px; padding: 14px 16px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 12px 0;
+}
+.dzikir-progress-text { display: flex; flex-direction: column; }
+.dzikir-progress-text strong { font-size: 1.6rem; color: #2e7d64; }
+.dzikir-progress-text span { font-size: .76rem; color: #7a8a9a; }
+.dzikir-harian-head { display: flex; align-items: center; gap: 10px; }
+.dzikir-harian-head i { color: #b0c0d0; font-size: 1.15rem; }
+.dzikir-harian-item.done .dzikir-harian-head i { color: #4caf50; }
+.dzikir-section h3 { font-size: .98rem; color: #1a5d4a; margin: 18px 0 12px; display: flex; align-items: center; gap: 8px; }
+.dzikir-section h3 i { color: #2e7d64; }
+.dzikir-section h3 small { color: #8a9aaa; font-weight: 400; font-size: .72rem; }
+
+/* ---------- Asmaul ---------- */
+.asmaul-summary { display: flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg,#f0f7f4,#e8f0ea); border-radius: 14px; padding: 14px; margin: 12px 0; }
+.asmaul-summary i { color: #ff9800; font-size: 1.3rem; }
+.asmaul-summary strong { display: block; color: #1a5d4a; font-size: 1rem; }
+.asmaul-summary span { color: #7a8a9a; font-size: .76rem; }
+
+/* ---------- Dark mode tambahan ---------- */
+.dark-mode body { background: #0f1420; }
+.dark-mode .clock-time { color: #d7eee4; }
+.dark-mode .clock-date { color: #a0b8d0; }
+.dark-mode .login-card { background: #16213e; }
+.dark-mode .login-logo i { color: #6fbf9a; }
+.dark-mode .login-logo h1 { color: #d7eee4; }
+.dark-mode .login-logo p { color: #8aa0b8; }
+.dark-mode .login-tabs { background: #0f1420; }
+.dark-mode .login-tabs button { color: #a0b8d0; }
+.dark-mode .login-tabs button.active { background: #22304f; color: #6fbf9a; box-shadow: none; }
+.dark-mode .login-form label { color: #a0b8d0; }
+.dark-mode .login-form input { background: #0f1420; border-color: #26334f; color: #e0edf6; }
+.dark-mode .login-error { background: #3a1f2e; color: #ff8a80; }
+.dark-mode .btn-primary { background: #2e7d64; }
+.dark-mode .btn-outline { background: #16213e; color: #6fbf9a; border-color: #3a6f57; }
+.dark-mode .login-note { color: #6c82a0; }
+.dark-mode .location-bar, .dark-mode .alarm-section, .dark-mode .setings-section,
+.dark-mode .kiblat-compass-card, .dark-mode .dzikir-step, .dark-mode .toggle-row,
+.dark-mode .doa-card, .dark-mode .sholawat-card, .dark-mode .niat-card, .dark-mode .guide-card,
+.dark-mode .dzikir-summary-card, .dark-mode .search-section input, .dark-mode .city-select,
+.dark-mode .fav-filter, .dark-mode .sound-btn, .dark-mode .fav-btn, .dark-mode .chip {
+    background: #16213e; border-color: #26334f;
+}
+.dark-mode .doa-icon { background: #22304f; color: #6fbf9a; }
+.dark-mode .prayer-card-item { background: #16213e; border-color: #26334f; }
+.dark-mode .prayer-name { color: #a0b8d0; }
+.dark-mode .prayer-time { color: #d7eee4; }
+.dark-mode .counter-inner { background: #16213e; box-shadow: inset 0 0 0 1px #26334f; }
+.dark-mode .count-total { color: #d7eee4; }
+.dark-mode .compass-ring { border-color: #22304f; }
+.dark-mode .tick { background: #3a4a6a; }
+.dark-mode .tick:nth-child(3n+1) { background: #5c7f9a; }
+.dark-mode .step-bar { background: #22304f; }
+.dark-mode .segmented { background: #0f1420; }
+.dark-mode .segmented button { color: #a0b8d0; }
+.dark-mode .segmented button.active { background: #22304f; color: #6fbf9a; }
+.dark-mode .setting-row + .setting-row, .dark-mode .sound-row + .sound-row { border-top-color: #26334f; }
+.dark-mode .dzikir-harian-item { background: #16213e; border-color: #26334f; }
+.dark-mode .dzikir-harian-item.done { background: #16213e; }
+.dark-mode .dzikir-harian-head i { color: #3a4a6a; }
+.dark-mode .panduan-tabs button { background: #16213e; border-color: #26334f; color: #a0b8d0; }
+.dark-mode .panduan-tabs button.active { background: #2e7d64; color: white; border-color: #2e7d64; }
+.dark-mode .basmalah-card, .dark-mode .asmaul-summary { background: #1a2844; }
+.dark-mode .guide-note { background: #0f1420; color: #8aa0b8; }
+.dark-mode .arabic-doa, .dark-mode .arabic-sholawat, .dark-mode .arab-text { color: #b0d8c8; }
+.dark-mode .latin-doa, .dark-mode .latin-sholawat, .dark-mode .latin-text { color: #4caf50; }
+.dark-mode .meaning-doa, .dark-mode .meaning-sholawat, .dark-mode .meaning-text { color: #a0b8d0; }
+.dark-mode .asmaul-card { background: #16213e; border-color: #26334f; }
+.dark-mode .asmaul-arab { color: #b0d8c8; }
+.dark-mode .empty-state { color: #6c82a0; }
+
+/* ========== FIXES & KOMPONEN BARU ========== */
+
+/* Header index (header-content) */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+}
+
+.header-content .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-greeting {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.15);
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+}
+
+.user-greeting i { font-size: 0.9rem; }
+
+.logout-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.8);
+    cursor: pointer;
+}
+
+/* Tabs agar tidak hancur saat 5 tombol */
+.section-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.tab-btn {
+    min-width: max-content;
+    white-space: nowrap;
+    font-size: 0.85rem;
+}
+
+.section-tabs::-webkit-scrollbar { display: none; }
+
+/* Quick action di beranda */
+.quick-actions { margin: 20px 0; }
+
+.quick-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: linear-gradient(135deg, #2e7d64 0%, #1a5d4a 100%);
+    color: white;
+    border-radius: 18px;
+    padding: 16px 18px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(46,125,100,0.25);
+    transition: transform 0.2s;
+}
+
+.quick-btn:hover { transform: translateY(-2px); }
+
+.quick-btn > i:first-child { font-size: 1.4rem; opacity: 0.9; }
+
+.quick-btn > div { flex: 1; display: flex; flex-direction: column; }
+
+.quick-btn span { font-size: 0.75rem; opacity: 0.85; }
+
+.quick-btn strong { font-size: 1.05rem; letter-spacing: 0.5px; }
+
+.quick-btn > i:last-child { opacity: 0.6; }
+
+/* Hijriah di jam jadwal */
+.clock-hijri {
+    margin-top: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #ffd54f;
+    letter-spacing: 0.5px;
+}
+
+.method-note {
+    margin-top: 15px;
+    font-size: 0.72rem;
+    color: #7a8a9a;
+    text-align: center;
+    padding: 10px;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+/* Tasbih steps (class-based agar ramah dark mode) */
+.step-current {
+    background: #e8f5e9 !important;
+    border-left: 4px solid #2e7d64 !important;
+    opacity: 1 !important;
+}
+
+.step-done {
+    background: #d7e9de !important;
+    opacity: 0.7 !important;
+}
+
+.dark-mode .step-current {
+    background: #0d3d2f !important;
+    border-left-color: #4caf50 !important;
+}
+
+.dark-mode .step-done {
+    background: #1f2a4e !important;
+    opacity: 0.6 !important;
+}
+
+.dark-mode .step {
+    border-left: 1px solid #2a3a6e;
+}
+
+/* Kartu panduan (tata cara) */
+.guide-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid #e0e8f0;
+}
+
+.guide-card h3 { color: #2e7d64; margin-bottom: 12px; font-size: 1rem; }
+
+.guide-steps { padding-left: 20px; }
+
+.guide-steps li { margin-bottom: 8px; font-size: 0.9rem; color: #3a4a5a; }
+
+.guide-steps li strong { color: #1a5d4a; }
+
+.guide-note {
+    margin-top: 12px;
+    font-size: 0.78rem;
+    color: #7a8a9a;
+    background: #f0f7f4;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* Chip filter kategori doa */
+.category-chips {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    margin-bottom: 18px;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.category-chips::-webkit-scrollbar { display: none; }
+
+.chip {
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: 1px solid #e0e8f0;
+    background: white;
+    color: #4a5a6a;
+    font-size: 0.78rem;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.chip.active, .chip:hover {
+    background: #2e7d64;
+    color: white;
+    border-color: #2e7d64;
+}
+
+/* Dzikir harian */
+.dzikir-harian-list { display: flex; flex-direction: column; gap: 14px; }
+
+.dzikir-harian-item {
+    background: white;
+    border: 1px solid #e0e8f0;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+}
+
+.dzikir-harian-item.done { opacity: 0.55; background: #f0f7f4; }
+
+.dzikir-harian-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+}
+
+.dh-number {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #2e7d64;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dh-repeat {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #ff9800;
+    background: #fff3e0;
+    border-radius: 12px;
+    padding: 2px 10px;
+}
+
+.dh-check {
+    margin-left: auto;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    color: #b0c0d0;
+    cursor: pointer;
+    padding: 2px 6px;
+}
+
+.dh-check.checked { color: #4caf50; }
+
+.dzikir-harian-item .arab-text { margin: 6px 0; }
+
+/* Asmaul Husna */
+.asmaul-summary {
+    grid-column: 1 / -1;
+    background: #f0f7f4;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    color: #4a5a6a;
+    text-align: center;
+}
+
+.asmaul-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.asmaul-card {
+    background: white;
+    border: 1px solid #e0e8f0;
+    border-radius: 16px;
+    padding: 14px;
+    text-align: center;
+    position: relative;
+    transition: all 0.25s;
+}
+
+.asmaul-card:hover { box-shadow: 0 6px 18px rgba(46,125,100,0.15); transform: translateY(-2px); }
+
+.asmaul-num {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: #e8f5e9;
+    color: #2e7d64;
+    font-size: 0.62rem;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 2px 7px;
+}
+
+.asmaul-arab {
+    font-size: 1.1rem;
+    font-family: 'Traditional Arabic', 'Amiri', serif;
+    color: #1a5d4a;
+    margin: 8px 0 4px;
+    line-height: 1.6;
+}
+
+.asmaul-latin {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #2e7d64;
+}
+
+.asmaul-meaning {
+    font-size: 0.7rem;
+    color: #7a8a9a;
+    margin-top: 4px;
+}
+
+/* Pemilih kota kiblat */
+.qibla-city-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.qibla-city-row select {
+    flex: 2;
+    padding: 10px 12px;
+    border: 1px solid #e0e8f0;
+    border-radius: 12px;
+    background: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+}
+
+.qibla-city-row .apply-city-btn { flex: 1; }
+
+/* Tombol aksi kecil (izin notifikasi) */
+.small-action-btn {
+    background: #e8f5e9;
+    border: 1px solid #c8e6d9;
+    color: #2e7d64;
+    border-radius: 20px;
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.small-action-btn.granted {
+    background: #4caf50;
+    border-color: #4caf50;
+    color: white;
+}
+
+/* Dark mode untuk komponen baru */
+.dark-mode .dzikir-harian-item,
+.dark-mode .asmaul-card,
+.dark-mode .guide-card {
+    background: #1f2a4e;
+    border-color: #2a3a6e;
+}
+
+.dark-mode .dzikir-harian-item.done { background: #16213e; }
+
+.dark-mode .dh-number { background: #2e7d64; }
+
+.dark-mode .dh-repeat { background: #2a3a6e; color: #ffd54f; }
+
+.dark-mode .dh-check { color: #5a6a8a; }
+
+.dark-mode .asmaul-arab { color: #b0d8c8; }
+
+.dark-mode .asmaul-latin { color: #4caf50; }
+
+.dark-mode .asmaul-meaning { color: #a0b8d0; }
+
+.dark-mode .asmaul-summary {
+    background: #1f2a4e;
+    color: #c0d0e0;
+}
+
+.dark-mode .guide-steps li { color: #c0d0e0; }
+
+.dark-mode .guide-steps li strong { color: #7fe0b0; }
+
+.dark-mode .guide-note {
+    background: #16213e;
+    color: #b0b8d0;
+}
+
+.dark-mode .method-note {
+    background: #1f2a4e;
+    color: #b0b8d0;
+}
+
+.dark-mode .chip {
+    background: #1f2a4e;
+    border-color: #2a3a6e;
+    color: #b0c0d0;
+}
+
+.dark-mode .chip.active, .dark-mode .chip:hover {
+    background: #2e7d64;
+    color: white;
+}
+
+.dark-mode .qibla-city-row select {
+    background: #1f2a4e;
+    color: #e0e0e0;
+    border-color: #2a3a6e;
+}
+
+.dark-mode .user-greeting { background: rgba(0,0,0,0.2); }
+
+/* Perbaiki: jaga kompas tetap gradient hijau dalam dark mode */
+.dark-mode .compass-circle-big {
+    background: radial-gradient(circle, #2e7d64 0%, #1a5d4a 100%) !important;
+    box-shadow: 0 0 0 8px rgba(46,125,100,0.25), 0 0 0 12px rgba(46,125,100,0.15);
+}
+
+/* Layar sempit */
+@media (max-width: 360px) {
+    .asmaul-grid { grid-template-columns: 1fr; }
+    .user-greeting span { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}
+
+/* Location Section */
+.location-section {
+    margin-bottom: 20px;
+}
+
+.location-box {
+    background: linear-gradient(135deg, #2e7d64 0%, #1a5d4a 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.location-info {
+    flex: 1;
+}
+
+.location-info span {
+    display: block;
+}
+
+.location-info span:first-child {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.location-info span:last-child {
+    font-size: 0.7rem;
+    opacity: 0.8;
+}
+
+.manual-location {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.manual-location select {
+    flex: 2;
+    padding: 10px;
+    border: 1px solid #e0e8f0;
+    border-radius: 12px;
+    background: white;
+    font-family: 'Inter', sans-serif;
+}
+
+.apply-city-btn {
+    flex: 1;
+    background: #2e7d64;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* Prayer Notif Switch */
+.prayer-notif {
+    margin-left: 10px;
+}
+
+.notif-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 22px;
+}
+
+.notif-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.notif-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.3s;
+    border-radius: 22px;
+}
+
+.notif-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+input:checked + .notif-slider {
+    background-color: #ff9800;
+}
+
+input:checked + .notif-slider:before {
+    transform: translateX(22px);
+}
+
+.prayer-time-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Active Alarms */
+.active-alarms {
+    background: #f8fafc;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.active-alarms h4 {
+    margin-bottom: 10px;
+    color: #2e7d64;
+}
+
+.alarms-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.alarm-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    border: 1px solid #e0e8f0;
+}
+
+.alarm-item i:first-child {
+    color: #ff9800;
+}
+
+.alarm-time {
+    font-weight: 600;
+    color: #2e7d64;
+}
+
+.remove-alarm {
+    background: none;
+    border: none;
+    color: #ff6b6b;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.no-alarms {
+    text-align: center;
+    color: #a0b0c0;
+    padding: 15px;
+}
+
+/* Toast Message */
+.toast-message {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2e7d64;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 2000;
+    animation: slideUp 0.3s ease, fadeOut 0.3s ease 2.5s forwards;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.dark-mode .active-alarms {
+    background: #1f2a4e;
+}
+
+.dark-mode .alarm-item {
+    background: #16213e;
+    border-color: #2a3a6e;
+}
+
+.dark-mode .manual-location select {
+    background: #1f2a4e;
+    color: #e0e0e0;
+    border-color: #2a3a6e;
+}
+
+.dark-mode .apply-city-btn {
+    background: #2e7d64;
+}
+
+/* Location Button Loading State */
+.location-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.location-btn i.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Error Toast */
+.toast-message.error {
+    background: #f44336;
+}
+
+.toast-message.warning {
+    background: #ff9800;
+}
+
+.toast-message.success {
+    background: #4caf50;
+}
+
+/* Real Time Clock */
+.real-time-clock {
+    text-align: center;
+    padding: 15px;
+    background: linear-gradient(135deg, #2e7d64 0%, #1a5d4a 100%);
+    border-radius: 15px;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.clock-time {
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: monospace;
+    letter-spacing: 2px;
+}
+
+.clock-date {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    margin-top: 5px;
+}
+
+.dark-mode .real-time-clock {
+    background: linear-gradient(135deg, #1a5d4a 0%, #0d3d2f 100%);
+}
+
+/* Real Time Clock - Enhanced */
+.real-time-clock {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #2e7d64 0%, #1a5d4a 100%);
+    border-radius: 20px;
+    margin-bottom: 20px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.clock-time {
+    font-size: 2.8rem;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.clock-date {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-top: 8px;
+}
+
+.clock-timezone {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+
+.dark-mode .real-time-clock {
+    background: linear-gradient(135deg, #1a5d4a 0%, #0d3d2f 100%);
+}
+
+/* PERBAIKI LOCATION BOX - RAPIH */
+.location-box {
+    background: linear-gradient(135deg, #2e7d64 0%, #1a5d4a 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.location-box > i {
+    font-size: 1.5rem;
+    width: 30px;
+    text-align: center;
+}
+
+.location-info {
+    flex: 2;
+    min-width: 120px;
+}
+
+.location-info span {
+    display: block;
+    line-height: 1.3;
+}
+
+.location-info span:first-child {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.location-info span:last-child {
+    font-size: 0.7rem;
+    opacity: 0.85;
+    margin-top: 2px;
+}
+
+.location-btn {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.location-btn:hover {
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.02);
+}
+
+.location-btn i {
+    font-size: 0.9rem;
+}
+
+.location-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Manual Location - RAPIH */
+.manual-location {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.manual-location select {
+    flex: 2;
+    padding: 10px 12px;
+    border: 1px solid #e0e8f0;
+    border-radius: 12px;
+    background: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.apply-city-btn {
+    flex: 1;
+    background: #2e7d64;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.apply-city-btn:hover {
+    background: #1a5d4a;
+}
+
+/* Dark Mode */
+.dark-mode .manual-location select {
+    background: #1f2a4e;
+    color: #e0e0e0;
+    border-color: #2a3a6e;
+}
+
+.dark-mode .apply-city-btn {
+    background: #2e7d64;
+}
+
+/* GPS Toggle Switch */
+.gps-toggle-box {
+    background: linear-gradient(135deg, #2e7d64 0%, #1a5d4a 100%);
+    color: white;
+    padding: 12px 15px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.gps-toggle-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.gps-toggle-info i {
+    font-size: 1.2rem;
+}
+
+.gps-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.gps-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.gps-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.3s;
+    border-radius: 24px;
+}
+
+.gps-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+input:checked + .gps-slider {
+    background-color: #4caf50;
+}
+
+input:checked + .gps-slider:before {
+    transform: translateX(26px);
+}
+
+.gps-status {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.2);
+}
+
+/* Dark Mode */
+.dark-mode .gps-toggle-box {
+    background: linear-gradient(135deg, #1a5d4a 0%, #0d3d2f 100%);
+}
+
+/* Toast Location */
+.toast-message-location {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2e7d64;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 30px;
+    z-index: 9999;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    animation: slideUp 0.3s ease;
+    max-width: 90%;
+    text-align: center;
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+    .toast-message-location {
+        white-space: normal;
+        text-align: center;
+        max-width: 90%;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* ========== KIBLAT STYLES ========== */
+
+.gps-status-banner {
+    background: #ff9800;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+}
+
+.compass-container-modern {
+    background: linear-gradient(135deg, #1a2a3a 0%, #0d1a24 100%);
+    border-radius: 30px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.compass-circle-big {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    margin: 0 auto;
+    background: radial-gradient(circle, #2e7d64 0%, #1a5d4a 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 0 8px rgba(255,255,255,0.1), 0 0 0 12px rgba(255,255,255,0.05);
+}
+
+.compass-needle-big {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: #ff6b6b;
+    z-index: 10;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+    transition: transform 0.1s linear;
+}
+
+.kiblat-pointer {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #ff9800;
+    z-index: 15;
+}
+
+.kiblat-pointer i {
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.compass-marks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.compass-marks span {
+    position: absolute;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.mark-n { top: 5px; left: 50%; transform: translateX(-50%); }
+.mark-ne { top: 15px; right: 25px; }
+.mark-e { right: 8px; top: 50%; transform: translateY(-50%); }
+.mark-se { bottom: 15px; right: 25px; }
+.mark-s { bottom: 5px; left: 50%; transform: translateX(-50%); }
+.mark-sw { bottom: 15px; left: 25px; }
+.mark-w { left: 8px; top: 50%; transform: translateY(-50%); }
+.mark-nw { top: 15px; left: 25px; }
+
+.compass-digital-info {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.info-box {
+    flex: 1;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.info-box i {
+    font-size: 1.2rem;
+    color: #ff9800;
+    margin-bottom: 5px;
+}
+
+.info-box span {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.7);
+    display: block;
+}
+
+.info-box strong {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+    display: block;
+}
+
+.compass-start-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 15px 0;
+    transition: transform 0.2s;
+}
+
+.compass-start-btn:hover {
+    transform: scale(1.02);
+}
+
+.compass-tips {
+    text-align: center;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.6);
+}
+
+.location-kiblat-info {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.info-card-location, .info-card-distance {
+    flex: 1;
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.info-card-location i, .info-card-distance i {
+    font-size: 1.5rem;
+    color: #2e7d64;
+}
+
+.info-card-location span, .info-card-distance span {
+    font-size: 0.7rem;
+    color: #7a8a9a;
+    display: block;
+}
+
+.info-card-location strong, .info-card-distance strong {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a2a3a;
+}
+
+.cities-qibla {
+    background: #f8fafc;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+.cities-qibla h3 {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    color: #2e7d64;
+}
+
+.cities-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.city-card {
+    background: white;
+    padding: 8px 12px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.city-card span {
+    font-size: 0.8rem;
+    color: #4a5a6a;
+}
+
+.city-card strong {
+    font-size: 0.9rem;
+    color: #2e7d64;
+    font-weight: 700;
+}
+
+.city-card i {
+    color: #ff9800;
+    font-size: 0.7rem;
+}
+
+/* Dark Mode */
+.dark-mode .info-card-location,
+.dark-mode .info-card-distance,
+.dark-mode .city-card {
+    background: #1f2a4e;
+}
+
+.dark-mode .info-card-location strong,
+.dark-mode .info-card-distance strong {
+    color: #e0e0e0;
+}
+
+.dark-mode .cities-qibla {
+    background: #16213e;
+}
+
+/* ========== BERANDA STYLES ========== */
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #2e7d64 0%, #1a5d4a 100%);
+    border-radius: 25px;
+    padding: 25px 20px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.hero-greeting h2 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.hero-greeting p {
+    opacity: 0.9;
+    font-size: 0.85rem;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.stat-card {
+    flex: 1;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 12px 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stat-card i {
+    font-size: 1.3rem;
+}
+
+.stat-card div {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.stat-label {
+    font-size: 0.65rem;
+    opacity: 0.8;
+}
+
+/* Next Prayer Card */
+.next-prayer-card {
+    background: white;
+    border-radius: 20px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #e0e8f0;
+}
+
+.next-prayer-icon {
+    background: #e8f5e9;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.next-prayer-icon i {
+    font-size: 1.5rem;
+    color: #2e7d64;
+}
+
+.next-prayer-info {
+    flex: 1;
+    margin-left: 15px;
+}
+
+.next-prayer-info span {
+    font-size: 0.7rem;
+    color: #7a8a9a;
+    display: block;
+}
+
+.next-prayer-info strong {
+    font-size: 1rem;
+    color: #1a2a3a;
+}
+
+.next-prayer-time {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #2e7d64;
+}
+
+/* Menu Card Enhancements */
+.menu-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff9800;
+    color: white;
+    font-size: 0.6rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.menu-card:hover .menu-icon i {
+    transform: scale(1.1);
+}
+
+.menu-icon i {
+    transition: transform 0.3s ease;
+}
+
+/* Quote Card */
+.quote-card {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6d9 100%);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+    position: relative;
+}
+
+.quote-card i {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    color: rgba(46,125,100,0.2);
+}
+
+.quote-card p {
+    font-style: italic;
+    color: #2e7d64;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.quote-card span {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.7rem;
+    color: #7a8a9a;
+}
+
+/* Dark Mode */
+.dark-mode .next-prayer-card {
+    background: #1f2a4e;
+    border-color: #2a3a6e;
+}
+
+.dark-mode .next-prayer-info strong {
+    color: #e0e0e0;
+}
+
+.dark-mode .quote-card {
+    background: linear-gradient(135deg, #1f2a4e 0%, #16213e 100%);
+}
+
+.dark-mode .quote-card p {
+    color: #4caf50;
+}
+
+/* Search Icon */
+.header-actions {
+    cursor: pointer;
+}
+
+.header-actions i {
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+.next-prayer-time {
+    text-align: right;
+}
+
+.next-prayer-time span {
+    display: block;
+}
+
+.next-prayer-time #nextPrayerTime {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #2e7d64;
+}
+
+.countdown-small {
+    font-size: 0.7rem;
+    font-family: monospace;
+    color: #ff9800;
+    margin-top: 5px;
+}
+/* FIX QUOTE CARD POSITION */
+.quote-card {
+    margin-bottom: 30px !important;
+}
+
+.main-menu {
+    padding-bottom: 90px;
+}
+
+.content-page {
+    padding-bottom: 90px;
+}
+
+/* BASMALAH SECTION */
+.basmalah-section {
+    margin-bottom: 25px;
+}
+
+.basmalah-card {
+    background: linear-gradient(135deg, #2e7d64 0%, #1a5d4a 100%);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+.basmalah-arab {
+    font-size: 1.8rem;
+    font-family: 'Traditional Arabic', 'Amiri', serif;
+    margin-bottom: 10px;
+}
+
+.basmalah-latin {
+    font-size: 0.9rem;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.basmalah-arti {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    margin-top: 8px;
+}
+
+.dark-mode .basmalah-card {
+    background: linear-gradient(135deg, #1a5d4a 0%, #0d3d2f 100%);
+}
+
+/* ===== Dark Mode (base) ===== */
+.dark-mode {
+    background: #1a1a2e;
+    color: #e0e0e0;
+}
+
+.dark-mode .app-container {
+    background: #16213e;
+}
+
+.dark-mode .header {
+    background: linear-gradient(135deg, #1a5d4a 0%, #0d3d2f 100%);
+}
+
+.dark-mode .menu-card,
+.dark-mode .prayer-card,
+.dark-mode .doa-card,
+.dark-mode .sholawat-card,
+.dark-mode .settings-section {
+    background: #1f2a4e;
+    color: #e0e0e0;
+    border-color: #2a3a6e;
+}
+
+.dark-mode .menu-card h3,
+.dark-mode .menu-card p,
+.dark-mode .doa-card h3,
+.dark-mode .sholawat-card h3,
+.dark-mode .settings-section h3 {
+    color: #e0e0e0;
+}
+
+.dark-mode .greeting {
+    background: linear-gradient(135deg, #1f2a4e 0%, #16213e 100%);
+}
+
+.dark-mode .dzikir-item {
+    background: #1f2a4e;
+}
+
+.dark-mode .prayer-time-card {
+    background: #1f2a4e;
+    border-color: #2a3a6e;
+}
+
+.dark-mode .step {
+    background: #1f2a4e;
+}
+
+.dark-mode .select-wrapper select {
+    background: #1f2a4e;
+    color: #e0e0e0;
+    border-color: #2a3a6e;
+}
+
+.dark-mode .search-box input {
+    background: #1f2a4e;
+    color: #e0e0e0;
+    border-color: #2a3a6e;
+}
+
+.dark-mode .bottom-nav {
+    background: #16213e;
+    border-top-color: #2a3a6e;
+}
+
+.dark-mode .counter-btn.reset {
+    background: #2a3a6e;
+    color: #e0e0e0;
+}
+
+.dark-mode .setting-item {
+    border-bottom-color: #2a3a6e;
+}
+
+.dark-mode .hero-section {
+    background: linear-gradient(135deg, #1a5d4a 0%, #0d3d2f 100%);
+}
+
+.dark-mode .next-prayer-card {
+    background: #1f2a4e;
+    border-color: #2a3a6e;
+}
+
+.dark-mode .next-prayer-info strong {
+    color: #e0e0e0;
+}
+
+.dark-mode .quote-card {
+    background: linear-gradient(135deg, #1f2a4e 0%, #16213e 100%);
+}
+
+.dark-mode .quote-card p {
+    color: #4caf50;
+}
+
+.dark-mode .preview-text {
+    background: #1f2a4e;
+    border-color: #2a3a6e;
+}
+
+.dark-mode .meaning-preview,
+.dark-mode .latin-preview {
+    color: #b0b8d0;
+}
+
+.dark-mode .compass-circle-big,
+.dark-mode .city-card,
+.dark-mode .info-card-location,
+.dark-mode .info-card-distance {
+    background: #1f2a4e;
+    border-color: #2a3a6e;
+}
+
+.dark-mode .login-card {
+    background: #1f2a4e;
+}
+
+.dark-mode .login-card h1 {
+    color: white;
+}
+
+.dark-mode .input-group input {
+    background: #16213e;
+    color: white;
+    border-color: #2a3a6e;
+}
+
+/* ===== Toast ===== */
+.toast-message {
+    animation: slideUp 0.3s ease, fadeOut 0.3s ease 2.4s forwards;
+}
+
+.toast-message.error {
+    background: #f44336;
+}
+
+.toast-message.warning {
+    background: #ff9800;
+}
+
+.toast-message.success {
+    background: #4caf50;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+:root {
+    --font-size-base: 16px;
+    --font-size-arabic: 1.3rem;
+    --font-size-latin: 1rem;
 }

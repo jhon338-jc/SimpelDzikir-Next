@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# sqlite runtime db (created saat runtime)
+/data
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

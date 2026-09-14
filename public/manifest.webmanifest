@@ -1,0 +1,18 @@
+{
+  "name": "Simpel Dzikir - Zikir & Doa Harian",
+  "short_name": "Simpel Dzikir",
+  "description": "Aplikasi zikir, doa harian, jadwal sholat, arah kiblat, tasbih digital, dan Asmaul Husna.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f7fa",
+  "theme_color": "#2e7d64",
+  "lang": "id",
+  "dir": "ltr",
+  "categories": ["lifestyle", "productivity"],
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
