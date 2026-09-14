@@ -6,7 +6,8 @@ import * as schema from "./schema";
 
 // Koneksi ganda: produksi = Turso (URL + token), lokal = file SQLite.
 function connectionUrl(): string {
-  if (process.env.TURSO_URL) return process.env.TURSO_URL;
+  const tursoUrl = process.env.TURSO_URL || process.env.TURSO_DATABASE_URL;
+  if (tursoUrl) return tursoUrl;
   const file = process.env.DATABASE_PATH || path.join(process.cwd(), "data", "simpledzikir.db");
   if (typeof window === "undefined") {
     try {
@@ -20,7 +21,7 @@ function connectionUrl(): string {
 
 function makeClient() {
   const url = connectionUrl();
-  if (process.env.TURSO_URL) {
+  if (process.env.TURSO_URL || process.env.TURSO_DATABASE_URL) {
     return createClient({ url, authToken: process.env.TURSO_AUTH_TOKEN });
   }
   return createClient({ url });
