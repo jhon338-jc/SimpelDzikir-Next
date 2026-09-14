@@ -1,15 +1,27 @@
 import webpush, { type PushSubscription as WebPushSubscription } from "web-push";
 
-const vapidKeys = {
-  publicKey: process.env.VAPID_PUBLIC_KEY || "",
-  privateKey: process.env.VAPID_PRIVATE_KEY || "",
-};
+const VAPID_SUBJECT = process.env.VAPID_SUBJECT || "mailto:admin@simpledzikir.example";
 
-webpush.setVapidDetails(
-  process.env.VAPID_SUBJECT || "mailto:admin@simpledzikir.example",
-  vapidKeys.publicKey,
-  vapidKeys.privateKey
-);
+function getVapidKeys(): { publicKey: string; privateKey: string } | null {
+  const publicKey = process.env.VAPID_PUBLIC_KEY || "";
+  const privateKey = process.env.VAPID_PRIVATE_KEY || "";
+  if (!publicKey || !privateKey) return null;
+  return { publicKey, privateKey };
+}
+
+let vapidReady = false;
+function ensureVapid(): boolean {
+  if (vapidReady) return true;
+  const keys = getVapidKeys();
+  if (!keys) return false;
+  webpush.setVapidDetails(VAPID_SUBJECT, keys.publicKey, keys.privateKey);
+  vapidReady = true;
+  return true;
+}
+
+export function isVapidConfigured(): boolean {
+  return getVapidKeys() !== null;
+}
 
 export type SubPayload = {
   endpoint: string;
@@ -29,6 +41,7 @@ export async function sendPush(sub: SubPayload, title: string, body: string): Pr
   };
 
   try {
+    if (!ensureVapid()) return "error";
     await webpush.sendNotification(wsub, JSON.stringify({ title, body, url: "/jadwal" }));
     return "sent";
   } catch (err: any) {

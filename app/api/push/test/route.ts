@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm";
 import { auth } from "@/lib/auth";
 import { db } from "@/db";
 import { pushSubscription } from "@/db/schema";
-import { sendPush } from "@/lib/webpush";
+import { sendPush, isVapidConfigured } from "@/lib/webpush";
 
 export const runtime = "nodejs";
 
@@ -11,6 +11,13 @@ export const runtime = "nodejs";
 export async function POST(request: NextRequest) {
   const session = await auth.api.getSession({ headers: request.headers });
   if (!session?.user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  if (!isVapidConfigured()) {
+    return NextResponse.json(
+      { error: "VAPID_PUBLIC_KEY / VAPID_PRIVATE_KEY belum di-set di environment" },
+      { status: 503 }
+    );
+  }
 
   const userId = session.user.id as string;
   const subs = await db
