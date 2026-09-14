@@ -39,8 +39,7 @@ if (process.env.NODE_ENV !== "production") {
 export const db = drizzle(client, { schema });
 
 // Migrasi sederhana: buat tabel bila belum ada (CREATE TABLE IF NOT EXISTS)
-export function runMigrations() {
-  client.executeMultiple(`
+const MIGRATION_SQL = `
     CREATE TABLE IF NOT EXISTS user (
       id TEXT PRIMARY KEY,
       name TEXT NOT NULL,
@@ -118,15 +117,33 @@ export function runMigrations() {
       created_at INTEGER NOT NULL
     );
     CREATE INDEX IF NOT EXISTS push_user_idx ON push_subscription(user_id);
-  `);
-}
+  `;
 
-try {
-  runMigrations();
-} catch (e) {
-  // Abaikan di lingkungan read-only / build; tabel akan dibuat saat runtime
-  // bila belum tersedia.
-  if (process.env.NODE_ENV === "development") {
-    console.warn("[db] runMigrations gagal:", e);
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+export async function runMigrations() {
+  for (let attempt = 0; attempt < 5; attempt++) {
+    try {
+      // Beri waktu tunggu agar antrean tulis (mis. build multi-worker) saling menunggu
+      await client.execute("PRAGMA busy_timeout = 10000").catch(() => {});
+      await client.executeMultiple(MIGRATION_SQL);
+      return;
+    } catch (e) {
+      const msg = String(e instanceof Error ? e.message : e);
+      const busy = /SQLITE_BUSY|locked/i.test(msg);
+      if (busy && attempt < 4) {
+        await sleep(500 * (attempt + 1));
+        continue;
+      }
+      // Abaikan di lingkungan read-only / build; tabel akan dibuat saat runtime
+      if (process.env.NODE_ENV === "development") {
+        console.warn("[db] runMigrations gagal:", msg);
+      }
+      return;
+    }
   }
 }
+
+// Jalankan saat bootstrap, fire-and-forget: kegagalan (read-only fs / build /
+// lock antar-worker) tidak memblokir route, semua ditangani di dalam runMigrations.
+void runMigrations();
